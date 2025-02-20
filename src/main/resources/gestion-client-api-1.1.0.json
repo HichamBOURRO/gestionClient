@@ -1,0 +1,274 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Mon API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/clients": {
+      "get": {
+        "summary": "Liste des clients",
+        "operationId": "getClients",
+        "responses": {
+          "200": {
+            "description": "Liste des clients",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }},
+    "/clients/addClient": {
+      "post": {
+        "summary": "Ajouter un nouveau Client",
+        "operationId": "addClient",
+        "requestBody": {
+          "description": "Les données du client à ajouter",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Client ajouté avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          }
+        }
+      }
+    },
+    "/clients/{id}": {
+      "get": {
+        "summary": "Récupérer un client par ID",
+        "operationId": "getClientById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Client non trouvé"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Supprimer un Client",
+        "operationId": "deleteClient",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID du Client à supprimer",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Client supprimé avec succès"
+          },
+          "404": {
+            "description": "Client non trouvé"
+          }
+        }
+      }
+    },
+    "/livraisons": {
+      "get": {
+        "summary": "Liste des livraisons",
+        "operationId": "getLivraisons",
+        "responses": {
+          "200": {
+            "description": "Liste des livraisons",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Livraison"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }},
+      "/livraisons/addLivraison": {
+      "post": {
+        "summary": "Ajouter une nouvelle Livraison",
+        "operationId": "addLivraison",
+        "requestBody": {
+          "description": "Les données de la livraison à ajouter",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Livraison"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Livraison ajoutée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livraison"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          }
+        }
+      }
+    },
+    "/livraisons/{id}": {
+      "get": {
+        "summary": "Récupérer une livraison par ID",
+        "operationId": "getLivraisonById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Livraison trouvée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Livraison"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Livraison non trouvée"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Supprimer une livraison",
+        "operationId": "deleteLivraison",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID de la Livraison à supprimer",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Livraison supprimée avec succès"
+          },
+          "404": {
+            "description": "Livraison non trouvée"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Client": {
+        "type": "object",
+        "properties": {
+          "idClient": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "prenom": {
+            "type": "string"
+          },
+          "motDePasse": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        }
+      },
+      "Livraison": {
+        "type": "object",
+        "properties": {
+          "idLivraison": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "dateLivraison": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateCreation": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

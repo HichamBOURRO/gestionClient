@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  db:
+    image: postgres:latest
+    container_name: bd_postgres
+    environment:
+      POSTGRES_DB: gestion-client       # Nom de la base de données
+      POSTGRES_USER: hicham_b # Nom de l'utilisateur de la base de données
+      POSTGRES_PASSWORD: hicham_b # Mot de passe de l'utilisateur
+    ports:
+      - "5432:5432"   # Expose le port 5432 pour accéder à la base de données
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always  # Redémarre le conteneur si nécessaire
+    networks:
+      - mynetwork
+  app:
+    image: gestionclient:latest  # Remplacez par le nom de votre image Docker
+    build:
+      context: .  # Chemin vers le répertoire contenant le Dockerfile
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - kafka
+    ports:
+      - "8080:8080"  # Expose le port de l'application
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/gestion-client
+      SPRING_DATASOURCE_USERNAME: hicham_b
+      SPRING_DATASOURCE_PASSWORD: hicham_b
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    networks:
+      - mynetwork
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  mynetwork:
+    driver: bridge

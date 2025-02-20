@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- SCRIPT 1: Créer la table CLIENT -->
+    <changeSet id="1" author="HICHAM_BOURRO">
+        <sqlFile path="classpath:/db/changelog/files/01_CREATION_CLIENTS.sql" />
+    </changeSet>
+
+    <!-- SCRIPT 2: CREATION DE LA TABLE ROLES -->
+    <changeSet id="2" author="HICHAM_BOURRO">
+        <sqlFile path="classpath:/db/changelog/files/02_CREATION_TYPE_LIVRAISON.sql" />
+    </changeSet>
+
+    <!-- SCRIPT 3: CREATION DE LA TABLE LIVRAISON -->
+    <changeSet id="3" author="HICHAM_BOURRO">
+        <sqlFile path="classpath:/db/changelog/files/03_CREATION_LIVRAISON.sql" />
+    </changeSet>
+
+    <!-- SCRIPT 4: INSERTION DE LA TABLE ROLES -->
+    <changeSet id="4" author="HICHAM_BOURRO">
+        <sqlFile path="classpath:/db/changelog/files/04_INSERTION_TYPE_LIVRAISON.sql" />
+    </changeSet>
+    <changeSet id="5" author="HICHAM_BOURRO">
+        <sqlFile path="classpath:/db/changelog/files/05_AJOUT_ROLE_CLIENT.sql" />
+    </changeSet>
+
+</databaseChangeLog>
