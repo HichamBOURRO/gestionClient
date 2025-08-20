@@ -35,7 +35,7 @@ Elles n'ont pas de priorité entre elles, vous pouvez implémenter celles qui vo
 
 ### USE CASE Synthese Appels Asynchrone
 
-![Texte alternatif](img/USE_CASE_SYNCHRO.jpg)
+![Texte alternatif](img/USE_CASE_SYNCHRO.png)
 
 
 ### USE CASE Synthese Appels Synchrone
