@@ -39,7 +39,7 @@ Elles n'ont pas de priorité entre elles, vous pouvez implémenter celles qui vo
 
 
 ### USE CASE Synthese Appels Synchrone
-![Texte alternatif](img/USE_CASE_API.png)
+![Texte alternatif](img/USE_CASE_API_V2.png)
 
 
 ## Choix Techniques
